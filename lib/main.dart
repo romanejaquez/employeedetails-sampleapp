@@ -115,7 +115,130 @@ class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blueAccent,
+        child: Icon(Icons.create),
+        onPressed: () {
+          Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ChatPage()),
+              );
+        },
+      ),
+      drawer: Drawer(
+        child: Container(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            children: <Widget>[
+              Row(children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: ClipOval(child: Image.asset('assets/roman.jpg',
+                    width: 50.0, height: 50.0),
+                  )),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10.0),
+                    child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                    Text("Roman Jaquez",
+                    style: TextStyle(fontWeight: FontWeight.bold,
+                    )),
+                    Text("Software Engineer",
+                    style: TextStyle(fontSize: 12.0))
+                  ],),
+                  ),
+                  
+              ],),
+              Padding(
+                padding: EdgeInsets.only(top: 20.0),
+                child: Column(
+                  children: <Widget>[
+                    InkWell(
+                      onTap: () {},
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10.0, top: 10.0, bottom: 10.0),
+                        child: Row(children: <Widget>[
+                        Icon(Icons.favorite),
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.0),
+                            child: Text("Favorites"),
+                          )
+                        ],),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10.0, top: 10.0, bottom: 10.0),
+                        child: Row(children: <Widget>[
+                        Icon(Icons.group),
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.0),
+                            child: Text("Social"),
+                          )
+                        ],),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10.0, top: 10.0, bottom: 10.0),
+                        child: Row(children: <Widget>[
+                        Icon(Icons.chat),
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.0),
+                            child: Text("Conversations"),
+                          )
+                        ],),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10.0, top: 10.0, bottom: 10.0),
+                        child: Row(children: <Widget>[
+                        Icon(Icons.send),
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.0),
+                            child: Text("Sent"),
+                          )
+                        ],),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10.0, top: 10.0, bottom: 10.0),
+                        child: Row(children: <Widget>[
+                        Icon(Icons.description),
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.0),
+                            child: Text("Drafts"),
+                          )
+                        ],),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10.0, top: 10.0, bottom: 10.0),
+                        child: Row(children: <Widget>[
+                        Icon(Icons.mail),
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.0),
+                            child: Text("All Mail"),
+                          )
+                        ],),
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ),
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
         title: Text('Employee List'),
@@ -137,15 +260,29 @@ class ListPage extends StatelessWidget {
   }
 }
 
+class ChatPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blueAccent,
+        title: Text('Chat'),
+      ),
+    );
+  }
+}
+
 class DetailsPage extends StatelessWidget {
 
   EmployeeModel employee;
 
   DetailsPage({this.employee});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blueAccent,
         title: Text("Employee Details"),
         elevation: 0.0,
       ),
