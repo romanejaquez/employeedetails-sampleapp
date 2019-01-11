@@ -261,6 +261,97 @@ class ListPage extends StatelessWidget {
 }
 
 class ChatPage extends StatelessWidget {
+
+  List<Widget> getAllMessages() {
+    return <Widget>[
+        Padding(
+          padding: EdgeInsets.only(top: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Stack(children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(top: 10.0, left: 30, right: 10, bottom: 10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Container(
+                    color: Colors.lightBlueAccent,
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                      'This is a conversation adsfads fadsfadsfdsfds afds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dssdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf ds',
+                      style: TextStyle(color: Colors.white),
+                    ),),
+                  ),
+                ),
+                  Positioned(
+                    top: 35,
+                    left: 25,
+                    child: Transform.rotate(
+                    angle: 40,
+                    child: Container(
+                      width: 20, height: 20,
+                      color: Colors.lightBlueAccent,
+                    ),
+                  ),
+                  )
+                ],),
+                Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: Text('Wednesday 12:32 PM', 
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 10.0
+                    )),
+                )
+            ],
+          )
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Stack(children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(top: 10.0, left: 10, right: 30, bottom: 10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Container(
+                    color: Colors.grey[300],
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                      'This is a conversation adsfads fadsfadsfdsfds afds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dssdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf ds',
+                      style: TextStyle(color: Colors.black),
+                    ),),
+                  ),
+                ),
+                Positioned(
+                  top: 35,
+                  right: 25,
+                  child: Transform.rotate(
+                  angle: 40,
+                  child: Container(
+                    width: 20, height: 20,
+                    color: Colors.grey[300],
+                  ),
+                ),
+                )
+              ],),
+              Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: Text('Wednesday 12:32 PM', 
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 10.0
+                  )),
+              ),
+            ],
+          )
+        )
+    ].toList();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -268,139 +359,48 @@ class ChatPage extends StatelessWidget {
         backgroundColor: Colors.blueAccent,
         title: Text('Chat'),
       ),
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        children: <Widget>[
-        Stack(children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 10.0, left: 30, right: 10, bottom: 10),
+      body: Stack(children: <Widget>[
+        Positioned(
+          top: 0, left: 0, right: 0, bottom: 80,
+          child: ListView(
+          scrollDirection: Axis.vertical,
+          children: getAllMessages().toList()
+        )),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: Container(
+            padding: EdgeInsets.all(5.0),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(40.0),
               child: Container(
-              color: Colors.lightBlueAccent,
-              padding: EdgeInsets.all(20.0),
-              child: Text(
-                'This is a conversation adsfads fadsfadsfdsfds afds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dssdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf ds',
-                style: TextStyle(color: Colors.white),
-              ),),
-            ),
+                color: Colors.grey[300],
+                padding: EdgeInsets.only(top: 10, left: 20, right: 70, bottom: 10),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Say something...'
+                  ),
+                ),
+              ),
+            )
           ),
-          Positioned(
-            top: 35,
-            left: 25,
-            child: Transform.rotate(
-            angle: 40,
+        ),
+        Positioned(
+          bottom: 14, right: 15,
+          child: InkWell(
             child: Container(
-              width: 20, height: 20,
-              color: Colors.lightBlueAccent,
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.blueAccent,
+                shape: BoxShape.circle
+              ),
+              child: Icon(Icons.send, color: Colors.white),
             ),
+            onTap: () {},
           ),
-          )
-        ],),
-        Stack(children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 10.0, left: 10, right: 30, bottom: 10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Container(
-              color: Colors.grey[300],
-              padding: EdgeInsets.all(20.0),
-              child: Text(
-                'This is a conversation adsfads fadsfadsfdsfds afds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dssdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf ds',
-                style: TextStyle(color: Colors.black),
-              ),),
-            ),
-          ),
-          Positioned(
-            top: 35,
-            right: 25,
-            child: Transform.rotate(
-            angle: 40,
-            child: Container(
-              width: 20, height: 20,
-              color: Colors.grey[300],
-            ),
-          ),
-          )
-        ],),
-        Stack(children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 10.0, left: 10, right: 30, bottom: 10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Container(
-              color: Colors.grey[300],
-              padding: EdgeInsets.all(20.0),
-              child: Text(
-                'This is a conversation adsfads fadsfadsfdsfds afds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dssdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf ds',
-                style: TextStyle(color: Colors.black),
-              ),),
-            ),
-          ),
-          Positioned(
-            top: 35,
-            right: 25,
-            child: Transform.rotate(
-            angle: 40,
-            child: Container(
-              width: 20, height: 20,
-              color: Colors.grey[300],
-            ),
-          ),
-          )
-        ],),
-        Stack(children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 10.0, left: 10, right: 30, bottom: 10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Container(
-              color: Colors.grey[300],
-              padding: EdgeInsets.all(20.0),
-              child: Text(
-                'This is a conversation adsfads fadsfadsfdsfds afds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dssdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf ds',
-                style: TextStyle(color: Colors.black),
-              ),),
-            ),
-          ),
-          Positioned(
-            top: 35,
-            right: 25,
-            child: Transform.rotate(
-            angle: 40,
-            child: Container(
-              width: 20, height: 20,
-              color: Colors.grey[300],
-            ),
-          ),
-          )
-        ],),
-        Stack(children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 10.0, left: 10, right: 30, bottom: 10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Container(
-              color: Colors.grey[300],
-              padding: EdgeInsets.all(20.0),
-              child: Text(
-                'This is a conversation adsfads fadsfadsfdsfds afds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dssdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf ds',
-                style: TextStyle(color: Colors.black),
-              ),),
-            ),
-          ),
-          Positioned(
-            top: 35,
-            right: 25,
-            child: Transform.rotate(
-            angle: 40,
-            child: Container(
-              width: 20, height: 20,
-              color: Colors.grey[300],
-            ),
-          ),
-          )
-        ],),
+        )
       ],)
     );
   }
