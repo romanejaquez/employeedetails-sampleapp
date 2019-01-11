@@ -110,6 +110,81 @@ class Factory {
   }
 }
 
+enum SpeechBubbleType {
+  Sender,
+  Recipient
+}
+
+class SpeechBubble extends StatelessWidget {
+
+  SpeechBubbleType type;
+  String text;
+  Color backgroundColor;
+  Color color;
+  String messageDate = DateTime.now().toString();
+
+  SpeechBubble({@required SpeechBubbleType type, String text, Color backgroundColor, Color color})
+  {
+    type = type;
+    text = text;
+    backgroundColor = backgroundColor == null ? 
+      (type == SpeechBubbleType.Sender ? Colors.lightBlueAccent : Colors.grey[300]) : backgroundColor;
+    color = color == null ? Colors.white : color;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+          padding: EdgeInsets.only(top: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Stack(children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(
+                    top: 10.0, 
+                    left: type == SpeechBubbleType.Sender ? 10 : 30, 
+                    right: type == SpeechBubbleType.Sender ? 30 : 10, 
+                    bottom: 10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Container(
+                    color: backgroundColor,
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                      text,
+                      style: TextStyle(color: color),
+                    ),),
+                  ),
+                ),
+                  Positioned(
+                    top: 35,
+                    left: type == SpeechBubbleType.Sender ? 0 : 25,
+                    right: type == SpeechBubbleType.Sender ? 25 : 0,
+                    child: Transform.rotate(
+                    angle: 40,
+                    child: Container(
+                      width: 20, height: 20,
+                      color: backgroundColor,
+                    ),
+                  ),
+                  )
+                ],),
+                Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: Text(messageDate, 
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 10.0
+                    )),
+                )
+            ],
+          )
+        );
+  }
+}
+
 class ListPage extends StatelessWidget {
 
   @override
@@ -260,87 +335,79 @@ class ListPage extends StatelessWidget {
   }
 }
 
-class ChatPage extends StatelessWidget {
+enum ChatBubbleType {
+  Sender,
+  Receiver
+}
 
-  List<Widget> getAllMessages() {
-    return <Widget>[
-        Padding(
-          padding: EdgeInsets.only(top: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Stack(children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(top: 10.0, left: 30, right: 10, bottom: 10),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Container(
-                    color: Colors.lightBlueAccent,
-                    padding: EdgeInsets.all(20.0),
-                    child: Text(
-                      'This is a conversation adsfads fadsfadsfdsfds afds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dssdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf ds',
-                      style: TextStyle(color: Colors.white),
-                    ),),
-                  ),
-                ),
-                  Positioned(
-                    top: 35,
-                    left: 25,
-                    child: Transform.rotate(
-                    angle: 40,
-                    child: Container(
-                      width: 20, height: 20,
-                      color: Colors.lightBlueAccent,
-                    ),
-                  ),
-                  )
-                ],),
-                Padding(
-                  padding: EdgeInsets.only(right: 20.0),
-                  child: Text('Wednesday 12:32 PM', 
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 10.0
-                    )),
-                )
-            ],
-          )
-        ),
-        Padding(
+class ChatBubble extends StatelessWidget {
+
+  ChatBubbleType t;
+  String text;
+  String messageSent = DateTime.now().toString();
+  Color bg;
+  Color fg;
+
+  ChatBubble({
+    ChatBubbleType type,
+    String text,
+    Color background,
+    Color foreground
+  }){
+    this.t = type;
+    this.text = text;
+    this.bg = background == null ? (t == ChatBubbleType.Sender ? Colors.lightBlueAccent : Colors.grey[300]) : background;
+    this.fg = foreground == null ? (t == ChatBubbleType.Sender ? Colors.white : Colors.black.withAlpha(200)) : foreground;
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
           padding: EdgeInsets.only(top: 20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Stack(children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(top: 10.0, left: 10, right: 30, bottom: 10),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Container(
-                    color: Colors.grey[300],
-                    padding: EdgeInsets.all(20.0),
-                    child: Text(
-                      'This is a conversation adsfads fadsfadsfdsfds afds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dsfds asdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf dssdf dsf adsf adsfds asdf asdfadsf adsf adsf adsf ds',
-                      style: TextStyle(color: Colors.black),
-                    ),),
+                Align(
+                  alignment: t == ChatBubbleType.Sender ? Alignment.bottomRight : Alignment.bottomLeft,
+                  child: Container(
+                    padding: t == ChatBubbleType.Sender ? EdgeInsets.only(top: 10.0, left: 10, right: 30, bottom: 10)
+                    : EdgeInsets.only(top: 10.0, left: 30, right: 10, bottom: 10),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Container(
+                      color: bg,
+                      padding: EdgeInsets.all(20.0),
+                      child: Text(
+                        text,
+                        style: TextStyle(color: fg),
+                      ),),
+                    ),
                   ),
                 ),
-                Positioned(
-                  top: 35,
+                t == ChatBubbleType.Sender ? Positioned(
+                  top: 29,
                   right: 25,
                   child: Transform.rotate(
                   angle: 40,
                   child: Container(
                     width: 20, height: 20,
-                    color: Colors.grey[300],
+                    color: bg,
                   ),
                 ),
-                )
+                ) : Positioned(
+                    top: 29,
+                    left: 25,
+                    child: Transform.rotate(
+                    angle: 40,
+                    child: Container(
+                      width: 20, height: 20,
+                      color: bg,
+                    ),
+                  ))
               ],),
               Padding(
                 padding: EdgeInsets.only(right: 20.0),
-                child: Text('Wednesday 12:32 PM', 
+                child: Text(messageSent, 
                   textAlign: TextAlign.right,
                   style: TextStyle(
                     color: Colors.grey,
@@ -349,8 +416,32 @@ class ChatPage extends StatelessWidget {
               ),
             ],
           )
-        )
-    ].toList();
+        );
+    
+  }
+}
+
+class ChatPage extends StatelessWidget {
+
+  List<Widget> getAllMessages() {
+    return <Widget>[
+          ChatBubble(
+            type: ChatBubbleType.Receiver,
+            text: "Some text text asdfas dfadsf sd fadsfadsf adsfadsf adsfadsf ads fadsf adsf  fadsf adsf"
+          ),
+          ChatBubble(
+            type: ChatBubbleType.Sender,
+            text: "Some text text asdfas dfadsf sd fadsfadsf adsfadsf adsfadsf ads fadsf adsf  fadsf adsf"
+          ),
+          ChatBubble(
+            type: ChatBubbleType.Receiver,
+            text: "And then some!adsf"
+          ),
+          ChatBubble(
+            type: ChatBubbleType.Sender,
+            text: "Just like dsfadsf adsfadsf adsfadsf ads fadsf adsf  fadsf adsf"
+          )
+        ].toList();
   }
   @override
   Widget build(BuildContext context) {
